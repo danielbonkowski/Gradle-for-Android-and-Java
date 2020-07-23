@@ -1,0 +1,3 @@
+include ':displayLibrary'
+include ':jokeLibrary'
+include ':app', ':backend'
