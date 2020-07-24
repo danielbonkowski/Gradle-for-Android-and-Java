@@ -1,21 +1,21 @@
-Jul 23, 2020 9:56:42 PM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
+Jul 24, 2020 2:50:53 PM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
 INFO: Overwriting system property key 'java.util.logging.config.file', value 'C:\Users\nicos\AppData\Local\Google\Cloud SDK\google-cloud-sdk\platform\google_appengine\google\appengine\tools\java\config\sdk\logging.properties' with value 'WEB-INF/logging.properties' from 'C:\Udacity\Gradle\ud867-master\FinalProject\backend\build\exploded-backend\WEB-INF\appengine-web.xml'
-2020-07-23 21:56:42.817:INFO::main: Logging initialized @446ms to org.eclipse.jetty.util.log.StdErrLog
-2020-07-23 21:56:42.867:WARN:oejs.AbstractConnector:main: Ignoring deprecated socket close linger time
-Jul 23, 2020 7:56:43 PM com.google.appengine.tools.development.IsolatedAppClassLoader checkWorkingDirectory
+2020-07-24 14:50:53.690:INFO::main: Logging initialized @1327ms to org.eclipse.jetty.util.log.StdErrLog
+2020-07-24 14:50:53.837:WARN:oejs.AbstractConnector:main: Ignoring deprecated socket close linger time
+Jul 24, 2020 12:50:54 PM com.google.appengine.tools.development.IsolatedAppClassLoader checkWorkingDirectory
 WARNING: Your working directory, (C:\Udacity\Gradle\ud867-master\FinalProject) is not equal to your 
 web application root (C:\Udacity\Gradle\ud867-master\FinalProject\backend\build\exploded-backend)
 You will not be able to access files from your working directory on the production server.
 
-2020-07-23 21:56:43.136:INFO:oejs.Server:main: jetty-9.4.27.v20200227; built: 2020-02-27T18:37:21.340Z; git: a304fd9f351f337e7c0e2a7c28878dd536149c6c; jvm 1.8.0_242-release-1644-b01
-2020-07-23 21:56:43.692:INFO:oejsh.ContextHandler:main: Started c.g.a.t.d.j.DevAppEngineWebAppContext@6f204a1a{/,file:///C:/Udacity/Gradle/ud867-master/FinalProject/backend/build/exploded-backend/,AVAILABLE}{C:\Udacity\Gradle\ud867-master\FinalProject\backend\build\exploded-backend}
-2020-07-23 21:56:43.692:INFO:oejs.session:main: DefaultSessionIdManager workerName=node0
-2020-07-23 21:56:43.692:INFO:oejs.session:main: node0 Scavenging disabled
-2020-07-23 21:56:43.708:INFO:oejs.AbstractConnector:main: Started NetworkTrafficSelectChannelConnector@6b09bb57{HTTP/1.1, (http/1.1)}{localhost:8080}
-2020-07-23 21:56:43.711:INFO:oejs.Server:main: Started @1339ms
-Jul 23, 2020 7:56:43 PM com.google.appengine.tools.development.AbstractModule startup
+2020-07-24 14:50:54.649:INFO:oejs.Server:main: jetty-9.4.27.v20200227; built: 2020-02-27T18:37:21.340Z; git: a304fd9f351f337e7c0e2a7c28878dd536149c6c; jvm 1.8.0_242-release-1644-b01
+2020-07-24 14:50:56.210:INFO:oejsh.ContextHandler:main: Started c.g.a.t.d.j.DevAppEngineWebAppContext@6f204a1a{/,file:///C:/Udacity/Gradle/ud867-master/FinalProject/backend/build/exploded-backend/,AVAILABLE}{C:\Udacity\Gradle\ud867-master\FinalProject\backend\build\exploded-backend}
+2020-07-24 14:50:56.211:INFO:oejs.session:main: DefaultSessionIdManager workerName=node0
+2020-07-24 14:50:56.211:INFO:oejs.session:main: node0 Scavenging disabled
+2020-07-24 14:50:56.247:INFO:oejs.AbstractConnector:main: Started NetworkTrafficSelectChannelConnector@6b09bb57{HTTP/1.1, (http/1.1)}{localhost:8080}
+2020-07-24 14:50:56.254:INFO:oejs.Server:main: Started @3891ms
+Jul 24, 2020 12:50:56 PM com.google.appengine.tools.development.AbstractModule startup
 INFO: Module instance default is running at http://localhost:8080/
-Jul 23, 2020 7:56:43 PM com.google.appengine.tools.development.AbstractModule startup
+Jul 24, 2020 12:50:56 PM com.google.appengine.tools.development.AbstractModule startup
 INFO: The admin console is running at http://localhost:8080/_ah/admin
-Jul 23, 2020 9:56:43 PM com.google.appengine.tools.development.DevAppServerImpl doStart
+Jul 24, 2020 2:50:56 PM com.google.appengine.tools.development.DevAppServerImpl doStart
 INFO: Dev App Server is now running

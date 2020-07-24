@@ -35,7 +35,7 @@
    },
    "path": "{name}",
    "response": {
-    "$ref": "MyBean"
+    "$ref": "MyJoke"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -93,8 +93,8 @@
  "protocol": "rest",
  "rootUrl": "https://myApplicationId.appspot.com/_ah/api/",
  "schemas": {
-  "MyBean": {
-   "id": "MyBean",
+  "MyJoke": {
+   "id": "MyJoke",
    "properties": {
     "data": {
      "type": "string"
