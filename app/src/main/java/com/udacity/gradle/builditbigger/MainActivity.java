@@ -18,6 +18,7 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import gradle.udacity.displaylibrary.DisplayActivity;
 import gradle.udacity.jokelibrary.Joke;
@@ -57,8 +58,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view) {
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Daniel"));
+    public void tellJoke(View view) throws ExecutionException, InterruptedException {
+        String result = new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Daniel")).get();
+        Intent intent = new Intent(this, DisplayActivity.class);
+        intent.putExtra(EXTRAS_JOKE, result);
+        startActivity(intent);
     }
 
 
@@ -66,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     public static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
 
         private static MyApi myApiService = null;
-        private Context context;
 
 
         @Override
@@ -85,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 myApiService = builder.build();
             }
 
-            context = params[0].first;
             String name = params[0].second;
 
             try{
@@ -95,12 +97,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
-        @Override
-        protected void onPostExecute(String result) {
-            Intent intent = new Intent(context, DisplayActivity.class);
-            intent.putExtra(EXTRAS_JOKE, result);
-            context.startActivity(intent);
-        }
     }
 }

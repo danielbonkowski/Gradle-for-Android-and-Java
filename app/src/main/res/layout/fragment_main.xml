@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,14 +13,24 @@
         android:id="@+id/instructions_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instructions" />
+        android:text="@string/instructions"
+        android:textSize="24sp"
+        ads:layout_constraintBottom_toTopOf="@+id/adView"
+        android:gravity="center"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
+        android:layout_marginTop="32dp"
         android:onClick="tellJoke"
-        android:text="@string/button_text" />
+        android:text="@string/button_text"
+        ads:layout_constraintEnd_toEndOf="@+id/instructions_text_view"
+        ads:layout_constraintStart_toStartOf="@+id/instructions_text_view"
+        ads:layout_constraintTop_toBottomOf="@+id/instructions_text_view" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -28,7 +38,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id" />
+        ads:adUnitId="@string/banner_ad_unit_id"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

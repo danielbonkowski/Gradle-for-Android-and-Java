@@ -19,3 +19,7 @@ Jul 24, 2020 12:50:56 PM com.google.appengine.tools.development.AbstractModule s
 INFO: The admin console is running at http://localhost:8080/_ah/admin
 Jul 24, 2020 2:50:56 PM com.google.appengine.tools.development.DevAppServerImpl doStart
 INFO: Dev App Server is now running
+Jul 24, 2020 2:51:30 PM com.google.appengine.tools.development.jetty9.LocalResourceFileServlet doGet
+WARNING: No file found for: /favicon.ico
+Jul 24, 2020 4:19:15 PM com.google.appengine.tools.development.jetty9.LocalResourceFileServlet doGet
+WARNING: No file found for: /_ah
