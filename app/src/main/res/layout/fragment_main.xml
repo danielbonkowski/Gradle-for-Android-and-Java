@@ -22,15 +22,26 @@
         ads:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/joke_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
         android:layout_marginTop="32dp"
-        android:onClick="tellJoke"
         android:text="@string/button_text"
         ads:layout_constraintEnd_toEndOf="@+id/instructions_text_view"
         ads:layout_constraintStart_toStartOf="@+id/instructions_text_view"
         ads:layout_constraintTop_toBottomOf="@+id/instructions_text_view" />
+
+    <ProgressBar
+        android:id="@+id/main_progress_bar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/joke_button"
+        ads:layout_constraintVertical_bias="0.20"
+        android:visibility="gone"/>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -44,5 +55,25 @@
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/increase_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Increase number"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/increase_text_view" />
+
+    <TextView
+        android:id="@+id/increase_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="0"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
