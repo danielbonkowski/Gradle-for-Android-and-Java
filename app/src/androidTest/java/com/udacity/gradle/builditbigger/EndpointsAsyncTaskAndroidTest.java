@@ -19,8 +19,8 @@ import gradle.udacity.displaylibrary.DisplayActivity;
 public class EndpointsAsyncTaskAndroidTest {
 
     @Rule
-    public ActivityTestRule<DisplayActivity> mainActivityActivityTestRule
-            = new ActivityTestRule<>(DisplayActivity.class);
+    public ActivityTestRule<MainActivity> mainActivityActivityTestRule
+            = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void testCheckGCEResponse() throws ExecutionException, InterruptedException {

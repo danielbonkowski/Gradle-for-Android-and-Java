@@ -28,6 +28,7 @@
         android:layout_below="@+id/instructions_text_view"
         android:layout_marginTop="32dp"
         android:text="@string/button_text"
+        android:onClick="tellJoke"
         ads:layout_constraintEnd_toEndOf="@+id/instructions_text_view"
         ads:layout_constraintStart_toStartOf="@+id/instructions_text_view"
         ads:layout_constraintTop_toBottomOf="@+id/instructions_text_view" />

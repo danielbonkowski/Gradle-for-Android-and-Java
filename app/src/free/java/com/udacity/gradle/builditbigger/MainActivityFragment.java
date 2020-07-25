@@ -35,7 +35,6 @@ public class MainActivityFragment extends Fragment {
     private Button mIncreaseButton;
     private TextView mIncreaseTextView;
     private int mCount = 0;
-    private static ButtonClickListener mButtonClickListener;
 
     public MainActivityFragment() {
     }
@@ -43,12 +42,8 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mButtonClickListener = (ButtonClickListener) context;
     }
 
-    public interface ButtonClickListener{
-        public void callback(String result);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,7 +65,6 @@ public class MainActivityFragment extends Fragment {
         });
 
         mJokeButton = root.findViewById(R.id.joke_button);
-        setupJokeButton();
 
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
@@ -82,65 +76,5 @@ public class MainActivityFragment extends Fragment {
                 .build();
         mAdView.loadAd(adRequest);
         return root;
-    }
-
-
-    public void setupJokeButton(){
-
-        final Context context = getContext();
-
-        mJokeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try{
-                    new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Daniel"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-
-        private static MyApi myApiService = null;
-
-        @Override
-        protected void onPreExecute() {
-            mProgressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(Pair<Context, String>... params) {
-
-
-            if(myApiService == null){
-                MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
-                        new AndroidJsonFactory(), null)
-                        .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
-                            @Override
-                            public void initialize(AbstractGoogleClientRequest<?> request) throws IOException {
-                                request.setDisableGZipContent(true);
-                            }
-                        });
-                myApiService = builder.build();
-            }
-
-            String name = params[0].second;
-
-            try{
-                return myApiService.sayHi(name).execute().getData();
-            }catch (IOException e){
-                return e.getMessage();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            mProgressBar.setVisibility(View.GONE);
-
-            mButtonClickListener.callback(result);
-        }
     }
 }
