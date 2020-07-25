@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity{
     private final static String EXTRAS_JOKE = "joke";
     private static ProgressBar mProgressBar;
     private static String mResult;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,10 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         mProgressBar = findViewById(R.id.main_progress_bar);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     @Override
@@ -61,11 +69,25 @@ public class MainActivity extends AppCompatActivity{
 
     public void tellJoke(View view){
 
-        try{
-            new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Daniel"));
-        }catch (Exception e){
-            e.printStackTrace();
+
+        if(mInterstitialAd.isLoaded()){
+            mInterstitialAd.show();
         }
+
+        final Context context = (Context) this;
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                try{
+                    new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Daniel"));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
 
 
     }

@@ -1,28 +1,19 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
-import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
-import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
+import com.google.android.gms.ads.InterstitialAd;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -35,6 +26,7 @@ public class MainActivityFragment extends Fragment {
     private Button mIncreaseButton;
     private TextView mIncreaseTextView;
     private int mCount = 0;
+    private InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
     }
@@ -66,6 +58,9 @@ public class MainActivityFragment extends Fragment {
 
         mJokeButton = root.findViewById(R.id.joke_button);
 
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
