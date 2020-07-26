@@ -26,7 +26,7 @@ import gradle.udacity.displaylibrary.DisplayActivity;
 
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.ButtonClickListener{
 
     private final static String EXTRAS_JOKE = "joke";
     private static ProgressBar mProgressBar;
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity{
 
         mProgressBar = findViewById(R.id.main_progress_bar);
 
-        mInterstitialAd = new InterstitialAd(this);
+        /*mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());*/
     }
 
     @Override
@@ -67,31 +67,14 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view){
-
-
-        if(mInterstitialAd.isLoaded()){
-            mInterstitialAd.show();
+    @Override
+    public void loadJoke() {
+        try{
+            new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Daniel"));
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        final Context context = (Context) this;
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                try{
-                    new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Daniel"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-
-
     }
-
 
 
     public static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
