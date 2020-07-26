@@ -22,11 +22,7 @@ import com.google.android.gms.ads.InterstitialAd;
  */
 public class MainActivityFragment extends Fragment {
 
-    private static ProgressBar mProgressBar;
     private Button mJokeButton;
-    private Button mIncreaseButton;
-    private TextView mIncreaseTextView;
-    private int mCount = 0;
     private InterstitialAd mInterstitialAd;
     private ButtonClickListener mButtonClickListener;
 
@@ -34,7 +30,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     public interface ButtonClickListener{
-        public void loadJoke();
+        void loadJoke();
     }
 
     @Override
@@ -49,23 +45,9 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        mProgressBar = (ProgressBar) root.findViewById(R.id.main_progress_bar);
-        final Context context = getContext();
-
         mInterstitialAd = new InterstitialAd(getActivity());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        mIncreaseTextView = root.findViewById(R.id.increase_text_view);
-        mIncreaseButton = root.findViewById(R.id.increase_button);
-
-        mIncreaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ++mCount;
-                mIncreaseTextView.setText(String.valueOf(mCount));
-            }
-        });
 
         mJokeButton = root.findViewById(R.id.joke_button);
         mJokeButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +57,6 @@ public class MainActivityFragment extends Fragment {
                     mInterstitialAd.show();
                 }
 
-                final Context context = (Context) getActivity();
                 mInterstitialAd.setAdListener(new AdListener() {
                     @Override
                     public void onAdClosed() {

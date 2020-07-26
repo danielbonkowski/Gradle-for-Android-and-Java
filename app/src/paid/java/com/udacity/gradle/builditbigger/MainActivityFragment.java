@@ -21,7 +21,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     public interface ButtonClickListener{
-        public void loadJoke();
+        void loadJoke();
     }
 
     @Override
