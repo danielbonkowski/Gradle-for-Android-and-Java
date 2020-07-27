@@ -11,16 +11,17 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class EndpointsAsyncTask extends AsyncTask<Context, Void, Void> {
+public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     private static MyApi myApiService = null;
+    private ShowResultListener mShowResultListener;
 
     public interface ShowResultListener{
         void displayJoke(String result);
     }
 
     @Override
-    protected Void doInBackground(Context... params) {
+    protected String doInBackground(Context... params) {
 
         if(myApiService == null){
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -35,15 +36,20 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, Void> {
             myApiService = builder.build();
         }
 
-        ShowResultListener showResultListener = (ShowResultListener) params[0];
+        mShowResultListener = (ShowResultListener) params[0];
 
         try{
-            String result = myApiService.getJoke().execute().getData();
-            showResultListener.displayJoke(result);
+            return myApiService.getJoke().execute().getData();
+
         }catch (IOException e){
             e.getMessage();
         }
 
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        mShowResultListener.displayJoke(result);
     }
 }
