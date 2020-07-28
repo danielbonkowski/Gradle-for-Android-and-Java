@@ -21,12 +21,20 @@ import gradle.udacity.displaylibrary.DisplayActivity;
 public class MainActivity extends AppCompatActivity implements MainActivityFragment.ButtonClickListener,
 EndpointsAsyncTask.ShowResultListener{
 
+    private final String HIDE_PROGRESS_BAR = "hide_progress_bar";
+
     private final static String EXTRAS_JOKE = "joke";
     private ProgressBar mProgressBar;
     private TextView mLabel;
     private Button mJokeButton;
-    private boolean hideProgressBar = true;
+    private boolean mHideProgressBar = true;
     @Nullable private MyIdlingResource mIdlingResource;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(HIDE_PROGRESS_BAR, mHideProgressBar);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +44,19 @@ EndpointsAsyncTask.ShowResultListener{
         mProgressBar = findViewById(R.id.main_progress_bar);
         mLabel = findViewById(R.id.instructions_text_view);
         mJokeButton = findViewById(R.id.joke_button);
+
+        if(savedInstanceState != null){
+            mHideProgressBar = savedInstanceState.getBoolean(HIDE_PROGRESS_BAR);
+        }
+
+        if(!mHideProgressBar){
+            mProgressBar.setVisibility(View.VISIBLE);
+            mLabel.setText(R.string.loading_label);
+            mJokeButton.setEnabled(false);
+        }
     }
+
+
 
     @Override
     public void loadJoke() {
@@ -50,7 +70,7 @@ EndpointsAsyncTask.ShowResultListener{
 
 
         mProgressBar.setVisibility(View.VISIBLE);
-        hideProgressBar = false;
+        mHideProgressBar = false;
 
 
         try{
@@ -62,7 +82,7 @@ EndpointsAsyncTask.ShowResultListener{
 
     @Override
     public void displayJoke(String result) {
-        hideProgressBar = true;
+        mHideProgressBar = true;
 
         Intent intent = new Intent(this, DisplayActivity.class);
         intent.putExtra(EXTRAS_JOKE, result);
@@ -76,7 +96,7 @@ EndpointsAsyncTask.ShowResultListener{
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        if(hideProgressBar){
+        if(mHideProgressBar){
             mJokeButton.setEnabled(true);
             mLabel.setText(R.string.instructions);
             mProgressBar.setVisibility(View.GONE);
