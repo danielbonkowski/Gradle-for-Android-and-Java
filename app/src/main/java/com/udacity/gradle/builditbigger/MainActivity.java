@@ -3,7 +3,9 @@ package com.udacity.gradle.builditbigger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,8 @@ EndpointsAsyncTask.ShowResultListener{
 
     private final static String EXTRAS_JOKE = "joke";
     private ProgressBar mProgressBar;
+    private TextView mLabel;
+    private Button mJokeButton;
     private boolean hideProgressBar = true;
     @Nullable private MyIdlingResource mIdlingResource;
 
@@ -30,10 +34,16 @@ EndpointsAsyncTask.ShowResultListener{
         setContentView(R.layout.activity_main);
 
         mProgressBar = findViewById(R.id.main_progress_bar);
+        mLabel = findViewById(R.id.instructions_text_view);
+        mJokeButton = findViewById(R.id.joke_button);
     }
 
     @Override
     public void loadJoke() {
+
+        mJokeButton.setEnabled(false);
+        mLabel.setText(R.string.loading_label);
+
         if(mIdlingResource != null){
             mIdlingResource.setIdleState(false);
         }
@@ -67,6 +77,8 @@ EndpointsAsyncTask.ShowResultListener{
     protected void onPostResume() {
         super.onPostResume();
         if(hideProgressBar){
+            mJokeButton.setEnabled(true);
+            mLabel.setText(R.string.instructions);
             mProgressBar.setVisibility(View.GONE);
         }
     }
