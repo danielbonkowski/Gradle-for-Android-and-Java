@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.test.espresso.IdlingResource;
 
@@ -102,6 +103,7 @@ EndpointsAsyncTask.ShowResultListener{
             mProgressBar.setVisibility(View.GONE);
         }
     }
+
 
 
     @NonNull

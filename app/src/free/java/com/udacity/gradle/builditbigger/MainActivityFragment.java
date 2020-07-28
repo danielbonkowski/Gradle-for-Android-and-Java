@@ -48,6 +48,18 @@ public class MainActivityFragment extends Fragment {
         mInterstitialAd = new InterstitialAd(getActivity());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                mButtonClickListener.loadJoke();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                mButtonClickListener.loadJoke();
+            }
+        });
 
         mJokeButton = root.findViewById(R.id.joke_button);
         mJokeButton.setOnClickListener(new View.OnClickListener() {
@@ -56,19 +68,6 @@ public class MainActivityFragment extends Fragment {
                 if(mInterstitialAd.isLoaded()){
                     mInterstitialAd.show();
                 }
-
-                mInterstitialAd.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdClosed() {
-                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                        mButtonClickListener.loadJoke();
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(int i) {
-                        mButtonClickListener.loadJoke();
-                    }
-                });
             }
         });
 
