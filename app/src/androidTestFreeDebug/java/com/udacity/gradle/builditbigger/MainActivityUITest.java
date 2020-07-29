@@ -2,14 +2,18 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.pm.ActivityInfo;
 
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.udacity.gradle.builditbigger.IdlingResources.MyIdlingResource;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -28,6 +32,16 @@ public class MainActivityUITest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule
             = new ActivityTestRule<>(MainActivity.class);
+
+    @Before
+    public void registerIdlingResource(){
+        IdlingRegistry.getInstance().register(MyIdlingResource.idlingResource);
+    }
+
+    @After
+    public void unregisterIdlingResource(){
+        IdlingRegistry.getInstance().unregister(MyIdlingResource.idlingResource);
+    }
 
     @Test
     public void testDefaultUI(){

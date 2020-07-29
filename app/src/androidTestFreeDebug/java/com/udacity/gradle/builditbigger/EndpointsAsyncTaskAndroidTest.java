@@ -5,7 +5,6 @@ package com.udacity.gradle.builditbigger;
 
 
 import android.content.pm.ActivityInfo;
-import android.view.View;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.IdlingRegistry;
@@ -16,16 +15,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 
-import com.google.android.gms.ads.InterstitialAd;
+import com.udacity.gradle.builditbigger.IdlingResources.MyIdlingResource;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.concurrent.ExecutionException;
 
 import gradle.udacity.displaylibrary.DisplayActivity;
 
@@ -38,7 +34,7 @@ import static androidx.test.espresso.intent.matcher.IntentMatchers.hasExtraWithK
 import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -49,14 +45,16 @@ import static org.hamcrest.Matchers.not;
 public class EndpointsAsyncTaskAndroidTest {
 
     private IdlingResource mIdlingResource;
-    ActivityScenario mActivityScenario;
     private final static String EXTRAS_JOKE = "joke";
+    private final Object LOCK = new Object();
+    private ActivityScenario mActivityScenario;
+
 
     @Rule
-    public ActivityTestRule<DisplayActivity> mActivityTestRule =
+    public ActivityTestRule<DisplayActivity> mDisplayActivityTestRule =
             new ActivityTestRule<>(DisplayActivity.class);
 
-    @Rule
+   @Rule
     public IntentsTestRule<MainActivity> intentsTestRule =
             new IntentsTestRule<>(MainActivity.class);
 
@@ -67,21 +65,67 @@ public class EndpointsAsyncTaskAndroidTest {
 
             @Override
             public void perform(MainActivity activity) {
-                mIdlingResource = activity.getIdlingResource();
-
-                IdlingRegistry.getInstance().register(mIdlingResource);
+                IdlingRegistry.getInstance().register(MyIdlingResource.idlingResource);
             }
         });
     }
 
+    @After
+    public void unregisterIdlingResource(){
+        IdlingRegistry.getInstance().unregister(MyIdlingResource.idlingResource);
+    }
+
 
     @Test
-    public void testJokeLoading(){
+    public void testBackPress() throws InterruptedException {
+        synchronized (LOCK){
+            LOCK.wait(2000);
+        }
+
         onView(withId(R.id.joke_button))
                 .perform(click());
 
-        onView(isRoot())
-                .perform(ViewActions.pressBack());
+        onView(isRoot()).perform(ViewActions.pressBack());
+
+    }
+
+
+
+    @Test
+    public void testJokeDisplay() throws InterruptedException {
+        synchronized (LOCK){
+            LOCK.wait(2000);
+        }
+
+        onView(withId(R.id.joke_button))
+                .perform(click());
+
+        onView(isRoot()).perform(ViewActions.pressBack());
+
+        synchronized (LOCK){
+            LOCK.wait(2000);
+        }
+
+
+        onView(withId(R.id.joke_text_view))
+                .check(matches(isDisplayed()));
+    }
+
+
+    @Test
+    public void testScreenRotation() throws InterruptedException {
+
+        synchronized (LOCK){
+            LOCK.wait(2000);
+        }
+
+        onView(withId(R.id.joke_button))
+                .perform(click());
+
+        onView(isRoot()).perform(ViewActions.pressBack());
+
+        mDisplayActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        mDisplayActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         onView(withId(R.id.joke_text_view))
                 .check(matches(isDisplayed()));
@@ -90,51 +134,21 @@ public class EndpointsAsyncTaskAndroidTest {
                 .check(matches(not(withText(""))));
     }
 
-
-
     @Test
-    public void testClosingAd(){
-        onView(withId(R.id.joke_button))
-                .perform(click());
+    public void testIntend() throws InterruptedException {
 
-        onView(isRoot())
-                .perform(ViewActions.pressBack());
-
-        onView(withId(R.id.instructions_text_view))
-                .check(matches(isDisplayed()));
-    }
-
-
-   /* @Test
-    public void testScreenRotation(){
-        onView(withId(R.id.joke_button))
-                .perform(click());
-
-        mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        onView(withId(R.id.joke_text_view))
-                .check(matches(isDisplayed()));
-
-        onView(withId(R.id.joke_text_view))
-                .check(matches(not(withText(""))));
-    }*/
-
-    /*@Test
-    public void testIntend(){
+        synchronized (LOCK){
+            LOCK.wait(2000);
+        }
 
         onView(withId(R.id.joke_button))
                 .perform(click());
+
+        onView(isRoot()).perform(ViewActions.pressBack());
 
         intended(hasComponent(DisplayActivity.class.getName()));
         intended(hasExtraWithKey(EXTRAS_JOKE));
 
-    }*/
-
-    @After
-    public void unregisterIdlingResource(){
-        if(mIdlingResource != null){
-            IdlingRegistry.getInstance().unregister(mIdlingResource);
-        }
     }
+
 }

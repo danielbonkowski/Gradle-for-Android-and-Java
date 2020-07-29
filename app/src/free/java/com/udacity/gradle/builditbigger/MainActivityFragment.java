@@ -2,10 +2,12 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +16,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 
 
@@ -22,9 +25,14 @@ import com.google.android.gms.ads.InterstitialAd;
  */
 public class MainActivityFragment extends Fragment {
 
+    private static final String TAG = MainActivityFragment.class.getSimpleName();
     private Button mJokeButton;
-    private InterstitialAd mInterstitialAd;
+
     private ButtonClickListener mButtonClickListener;
+    private Button mIncreaseButton;
+    private TextView mIncreaseTextView;
+    private int mCounter;
+
 
     public MainActivityFragment() {
     }
@@ -37,6 +45,8 @@ public class MainActivityFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mButtonClickListener = (ButtonClickListener) context;
+
+
     }
 
 
@@ -44,32 +54,19 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+        mIncreaseButton = root.findViewById(R.id.increase_button);
+        mIncreaseTextView = root.findViewById(R.id.increase_text_view);
 
-        mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                mButtonClickListener.loadJoke();
-            }
 
+        mIncreaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onAdFailedToLoad(int i) {
-                mButtonClickListener.loadJoke();
+            public void onClick(View v) {
+                ++mCounter;
+                mIncreaseTextView.setText(String.valueOf(mCounter));
             }
         });
 
-        mJokeButton = root.findViewById(R.id.joke_button);
-        mJokeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mInterstitialAd.isLoaded()){
-                    mInterstitialAd.show();
-                }
-            }
-        });
+
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
@@ -81,4 +78,5 @@ public class MainActivityFragment extends Fragment {
         mAdView.loadAd(adRequest);
         return root;
     }
+
 }

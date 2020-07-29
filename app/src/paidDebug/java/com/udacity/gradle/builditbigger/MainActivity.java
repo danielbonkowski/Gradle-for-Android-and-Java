@@ -105,7 +105,7 @@ EndpointsAsyncTask.ShowResultListener{
     }
 
 
-
+    @VisibleForTesting
     @NonNull
     public IdlingResource getIdlingResource(){
         if(mIdlingResource == null){
