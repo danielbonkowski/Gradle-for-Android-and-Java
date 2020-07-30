@@ -14,13 +14,14 @@
         android:id="@+id/instructions_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/instructions"
         android:textSize="24sp"
         ads:layout_constraintBottom_toTopOf="@+id/adView"
-        android:gravity="center"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="parent" />
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintVertical_bias="0.3" />
 
     <Button
         android:id="@+id/joke_button"
@@ -28,11 +29,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
         android:layout_marginTop="32dp"
-        android:text="@string/button_text"
+        android:layout_marginBottom="32dp"
         android:onClick="tellJoke"
+        android:text="@string/button_text"
+        ads:layout_constraintBottom_toTopOf="@+id/adView"
         ads:layout_constraintEnd_toEndOf="@+id/instructions_text_view"
         ads:layout_constraintStart_toStartOf="@+id/instructions_text_view"
-        ads:layout_constraintTop_toBottomOf="@+id/instructions_text_view" />
+        ads:layout_constraintTop_toBottomOf="@+id/instructions_text_view"
+        ads:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/main_progress_bar"
@@ -61,25 +65,5 @@
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/increase_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Increment"
-        ads:layout_constraintEnd_toEndOf="@+id/instructions_text_view"
-        ads:layout_constraintStart_toStartOf="@+id/instructions_text_view"
-        ads:layout_constraintTop_toBottomOf="@+id/increase_text_view" />
-
-    <TextView
-        android:id="@+id/increase_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="0"
-        ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

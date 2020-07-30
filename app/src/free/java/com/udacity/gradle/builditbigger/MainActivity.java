@@ -45,11 +45,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
 
 
     @Override
-    public void onBackPressed() {
-        MyIdlingResource.increment();
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(HIDE_PROGRESS_BAR, mHideProgressBar);
         super.onSaveInstanceState(outState);
