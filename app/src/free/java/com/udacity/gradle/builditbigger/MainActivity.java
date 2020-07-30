@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
         EndpointsAsyncTask.ShowResultListener {
 
     private final String HIDE_PROGRESS_BAR = "hide_progress_bar";
-
     private final static String EXTRAS_JOKE = "joke";
+
     private ProgressBar mProgressBar;
     private TextView mLabel;
     private Button mJokeButton;

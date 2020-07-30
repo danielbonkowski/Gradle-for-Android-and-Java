@@ -19,8 +19,7 @@ import javax.annotation.Nullable;
 import gradle.udacity.displaylibrary.DisplayActivity;
 
 
-public class MainActivity extends AppCompatActivity implements MainActivityFragment.ButtonClickListener,
-EndpointsAsyncTask.ShowResultListener{
+public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.ShowResultListener{
 
     private final String HIDE_PROGRESS_BAR = "hide_progress_bar";
 
@@ -46,6 +45,15 @@ EndpointsAsyncTask.ShowResultListener{
         mLabel = findViewById(R.id.instructions_text_view);
         mJokeButton = findViewById(R.id.joke_button);
 
+        mJokeButton = findViewById(R.id.joke_button);
+
+        mJokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadJoke();
+            }
+        });
+
         if(savedInstanceState != null){
             mHideProgressBar = savedInstanceState.getBoolean(HIDE_PROGRESS_BAR);
         }
@@ -58,8 +66,6 @@ EndpointsAsyncTask.ShowResultListener{
     }
 
 
-
-    @Override
     public void loadJoke() {
 
         mJokeButton.setEnabled(false);
