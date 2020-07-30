@@ -2,16 +2,12 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.test.espresso.IdlingResource;
 
 /*import com.udacity.gradle.builditbigger.IdlingResources.MyIdlingResource;*/
 
@@ -20,12 +16,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
 import com.udacity.gradle.builditbigger.IdlingResources.MyIdlingResource;
-import com.udacity.gradle.builditbigger.MainActivityFragment;
-import com.udacity.gradle.builditbigger.R;
-
-import javax.annotation.Nullable;
 
 import gradle.udacity.displaylibrary.DisplayActivity;
 

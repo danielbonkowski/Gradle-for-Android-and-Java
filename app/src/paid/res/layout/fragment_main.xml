@@ -1,4 +1,5 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +8,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivityFragment">
+    tools:context=".MainActivityFragment"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
 
     <TextView
         android:id="@+id/instructions_text_view"
@@ -28,7 +31,6 @@
         android:layout_below="@+id/instructions_text_view"
         android:layout_marginTop="32dp"
         android:text="@string/button_text"
-        android:onClick="tellJoke"
         ads:layout_constraintEnd_toEndOf="@+id/instructions_text_view"
         ads:layout_constraintStart_toStartOf="@+id/instructions_text_view"
         ads:layout_constraintTop_toBottomOf="@+id/instructions_text_view" />
@@ -42,6 +44,6 @@
         ads:layout_constraintStart_toStartOf="parent"
         ads:layout_constraintTop_toBottomOf="@+id/joke_button"
         ads:layout_constraintVertical_bias="0.20"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

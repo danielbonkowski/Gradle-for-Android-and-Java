@@ -2,18 +2,13 @@ package gradle.udacity.jokelibrary;
 
 
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 public class Joke {
 
-    List<String> jokes = Arrays.asList("A blonde walks in to a store she asks the salesman \"How much for the T.V?\"\n The sales person says \"Madam we don't sell to blondes.\"\n The next day she colors her hair black then she goes back into the store and she asks again\n \"How much for that T.V?\"\n The sales man says \"Madam we don't sell to blondes!\"\n Upset her plan didn't work she \"How do you know I'm a blonde?\"\n The salesman replied \" It's not a T.V. it's a microwave!\" ",
+    final List<String> jokes = Arrays.asList("A blonde walks in to a store she asks the salesman \"How much for the T.V?\"\n The sales person says \"Madam we don't sell to blondes.\"\n The next day she colors her hair black then she goes back into the store and she asks again\n \"How much for that T.V?\"\n The sales man says \"Madam we don't sell to blondes!\"\n Upset her plan didn't work she \"How do you know I'm a blonde?\"\n The salesman replied \" It's not a T.V. it's a microwave!\" ",
             "An Irishman fell a hundred feet from a building site and asked if he was hurt by the fall.\n \"Indeed not,\" he replied, \n\"It wasn't the fall that hurt me at all, it was the landing.\"",
             "Q how do you confuse a blond?\n A. draw a circle and tell her to sit in the corner",
             "There are 3 women who escape form a jail. a blonde, a redhead, and a brunette. \nThey see 3 potato sacks on the edge of the road, and each jumps in one to hide from the police.\n 2 officers see the sacks \"lets check these sacks\" the first one says. he kicks the redhead's sack,\n \"Meow!\" she says \"nothing but a cat in this one then he kicks the brunette's, \"Woof!\" she says, \n\"Nothing but a dog in this one! he kick's the blonde's sack \"Po-ta-to!\" ",
