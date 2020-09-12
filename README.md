@@ -30,3 +30,7 @@ a physical device, you need to change the API Root URL in the
 Before the first launch of the application, you need to run the 
 "appengineStart" task to start the Google Cloud Endpoint API
 on your emulator / physical device.
+
+## License
+
+The contents of this repository are covered under the [MIT License](./LICENSE.md).
